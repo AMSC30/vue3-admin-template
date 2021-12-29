@@ -1,5 +1,5 @@
 <template>
-    <div id="nav">home</div>
+    <n-button type="primary">hello</n-button>
     <router-view />
 </template>
 
