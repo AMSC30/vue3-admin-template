@@ -1,8 +1,8 @@
-import { create, NButton } from 'naive-ui'
+import { create, NButton, NLayout, NLayoutHeader, NLayoutSider } from 'naive-ui'
 import { App } from 'vue'
 
 const naive = create({
-    components: [NButton]
+    components: [NButton, NLayout, NLayoutHeader, NLayoutSider]
 })
 
 export default function (app: App) {

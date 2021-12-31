@@ -1,17 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
+import { asyncRoutes, constantRoutes } from './routes'
 
-const routes: RouteRecordRaw[] = [
-    {
-        path: '/',
-        redirect: '/home'
-    },
-    {
-        path: '/home',
-        name: 'Home',
-        component: Home
-    }
-]
+const routes: RouteRecordRaw[] = [...asyncRoutes, ...constantRoutes]
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
