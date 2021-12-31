@@ -1,23 +1,23 @@
-import axios from 'axios'
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import config from './config'
 
 axios.defaults.timeout = config.timeout
 axios.defaults.baseURL = config.baseURL
 
 axios.interceptors.request.use(
-    (config) => {
+    (config: AxiosRequestConfig) => {
         return config
     },
-    (error) => {
+    (error: AxiosError) => {
         return Promise.reject(error)
     }
 )
 
 axios.interceptors.response.use(
-    (res) => {
+    (res: AxiosResponse) => {
         return res.data
     },
-    (error) => {
+    (error: AxiosError) => {
         return Promise.reject(error)
     }
 )
