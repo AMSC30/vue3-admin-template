@@ -4,7 +4,7 @@ function addStyleResource(rule) {
     rule.use('style-resource')
         .loader('style-resources-loader')
         .options({
-            patterns: [path.resolve(__dirname, './src/assets/styles/variable.less')]
+            patterns: [path.resolve(__dirname, './src/assets/styles/variable.less'), path.resolve(__dirname, './src/assets/styles/mixin/index.less')]
         })
 }
 
