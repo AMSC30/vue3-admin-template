@@ -1,11 +1,11 @@
-import { userStateType } from '../types'
+import { IUserStateType } from './types'
 
 export default {
     state: {
         userInfo: null
     },
     mutations: {
-        SET_USER(state: userStateType, payload: any) {
+        SET_USER(state: IUserStateType, payload: any) {
             state.userInfo = payload
         }
     },
