@@ -1,4 +1,5 @@
 const path = require('path')
+const proxy = 'https://decision-ci.icekredit.com'
 
 function addStyleResource(rule) {
     rule.use('style-resource')
@@ -17,7 +18,22 @@ module.exports = {
     configureWebpack: {
         resolve: {
             alias: {
-                '@': path.resolve('src')
+                '@': path.resolve('src'),
+                '@c': path.resolve('src/components'),
+                '@a': path.resolve('src/assets'),
+                '@u': path.resolve('src/utils')
+            }
+        }
+    },
+    devServer: {
+        proxy: {
+            '/ci': {
+                target: proxy,
+                ws: true,
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/ci': '/'
+                }
             }
         }
     }

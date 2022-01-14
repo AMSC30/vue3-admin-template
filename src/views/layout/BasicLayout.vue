@@ -18,8 +18,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { getService } from '@/plugins/axios'
+import { defineComponent, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useNotification } from 'naive-ui'
 
 export default defineComponent({
     name: 'Home',
@@ -46,7 +48,22 @@ export default defineComponent({
         const handleMenuClick = (key: string) => {
             router.push(key)
         }
+        onMounted(() => {
+            const notification = useNotification()
+            console.log(notification)
+            notification.success({
+                content: '说点啥呢',
+                meta: '想不出来'
+            })
 
+            getService('/ci/auth/session/userInfo', {})
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((error) => {
+                    console.log(error.message)
+                })
+        })
         return {
             menuOptions,
             handleMenuClick
