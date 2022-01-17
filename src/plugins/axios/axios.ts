@@ -2,10 +2,12 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 import config from './config'
 
-axios.defaults.timeout = config.timeout
-axios.defaults.baseURL = config.baseURL
+const instance = axios.create({
+    timeout: config.timeout,
+    baseURL: config.baseURL
+})
 
-axios.interceptors.request.use(
+instance.interceptors.request.use(
     (config: AxiosRequestConfig) => {
         config.headers!['language'] = 'zh'
         config.headers!['Cache-control'] = 'no-cache'
@@ -21,8 +23,13 @@ axios.interceptors.request.use(
     }
 )
 
-axios.interceptors.response.use(
+instance.interceptors.response.use(
     (res: AxiosResponse) => {
+        if (!res.data.code) {
+            // 文件下载的情况
+            return res.data
+        }
+
         if (res.data.code === config.notLoginCode) {
             window.$notice('error', {
                 title: '操作失败',
@@ -53,4 +60,4 @@ axios.interceptors.response.use(
     }
 )
 
-export default axios
+export default instance

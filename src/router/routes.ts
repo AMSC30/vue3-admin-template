@@ -19,9 +19,14 @@ export const asyncRoutes: RouteRecordRaw[] = [
         redirect: '/main'
     },
     {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/login/Login.vue')
+    },
+    {
         path: '/main',
         name: 'main',
-        component: () => import('@/views/layout/BasicLayout.vue'),
+        component: () => import('@/views/main/Main.vue'),
         children: [...menuRoutes]
     },
     {

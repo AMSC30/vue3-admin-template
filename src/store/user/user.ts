@@ -1,6 +1,7 @@
 import { IUserStateType } from './types'
 
 export default {
+    namespace: true,
     state: {
         userInfo: null
     },
@@ -9,5 +10,12 @@ export default {
             state.userInfo = payload
         }
     },
-    actions: {}
+    actions: {
+        goToLogin() {
+            return new Promise((resolve, reject) => {
+                resolve(1)
+                reject()
+            })
+        }
+    }
 }

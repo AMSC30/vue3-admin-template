@@ -1,36 +1,44 @@
 import { AxiosRequestConfig } from 'axios'
-import { axiosConfigKeyType } from './types'
 import axios from './axios'
+import { ContentTypeEnum, PostDataType } from './types'
+import { jsonToString } from './util'
 
-function getService(url: string): Promise<any>
-function getService(url: string, data: any): Promise<any>
-function getService(url: string, data: any, config: AxiosRequestConfig): Promise<any>
+export const getService = (url: string, config?: AxiosRequestConfig) => {
+    return axios.get(url, config)
+}
 
-function getService(url: string, data?: any, config?: AxiosRequestConfig) {
-    const newConfig: AxiosRequestConfig = {}
+export const postService = (url: string, data: PostDataType, config?: AxiosRequestConfig) => {
+    return axios.post(url, data, config)
+}
 
-    if (data) {
-        newConfig.params = data
-        if (config) {
-            for (const key in config) {
-                newConfig[key as axiosConfigKeyType] = config[key as axiosConfigKeyType]
-            }
+export const postFormService = (url: string, data: PostDataType, config: AxiosRequestConfig) => {
+    return axios.post(url, jsonToString(data), {
+        ...config,
+        headers: {
+            'Content-Type': ContentTypeEnum.FORM_URLENCODED
         }
-    }
-
-    return axios.get(url, newConfig)
+    })
 }
+export const postFormDataService = (url: string, data: PostDataType, config?: AxiosRequestConfig) => {
+    const fd: FormData = new window.FormData()
 
-export const postService = () => {
-    console.log(1212)
-}
+    Object.keys(data).forEach((key) => {
+        const value: any = data[key]
+        if (Array.isArray(value)) {
+            value.forEach((item) => {
+                fd.append(key, item)
+            })
+            return
+        } else {
+            fd.append(key, data[key])
+        }
+    })
 
-export const postFormService = () => {
-    console.log(1212)
+    return axios.post(url, fd, config)
 }
-export { getService }
 export default {
     getService,
     postService,
-    postFormService
+    postFormService,
+    postFormDataService
 }
