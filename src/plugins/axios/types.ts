@@ -1,5 +1,5 @@
 export interface PostDataType {
-    (key: string): any
+    [key: string]: any
 }
 
 export enum ContentTypeEnum {

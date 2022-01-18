@@ -22,8 +22,8 @@ export const postFormService = (url: string, data: PostDataType, config: AxiosRe
 export const postFormDataService = (url: string, data: PostDataType, config?: AxiosRequestConfig) => {
     const fd: FormData = new window.FormData()
 
-    Object.keys(data).forEach((key) => {
-        const value: any = data[key]
+    Object.keys(data).forEach((key: string) => {
+        const value = data[key]
         if (Array.isArray(value)) {
             value.forEach((item) => {
                 fd.append(key, item)
