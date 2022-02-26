@@ -13,7 +13,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
 import MessageContent from './components/MessageContent.vue'
 import DialogContent from './components/DialogContent.vue'
 import NoticeContent from './components/NoticeContent.vue'

@@ -1,5 +1,5 @@
 <template>
-    <NConfigProvider>
+    <NConfigProvider style="height: 100%">
         <ApplicationProvider>
             <router-view />
         </ApplicationProvider>
